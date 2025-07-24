@@ -1,0 +1,44 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: todo-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: todo_app
+      MYSQL_USER: Suchith
+      MYSQL_PASSWORD: "+1234SSe"
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./server
+    container_name: todo-backend
+    restart: always
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=Suchith
+      - DB_PASSWORD="+1234SSe"
+      - DB_NAME=todo_app
+    depends_on:
+      - mysql
+    ports:
+      - "5001:5000"
+
+  frontend:
+    build: ./client
+    container_name: todo-frontend
+    restart: always
+    environment:
+      VITE_API_URL: http://localhost:5000
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+
+volumes:
+  db_data:
+    driver: local
