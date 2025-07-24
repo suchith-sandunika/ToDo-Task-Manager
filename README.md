@@ -1,3 +1,7 @@
+## Cloning the GitHub Repository
+
+Run 'git clone https://github.com/suchith-sandunika/ToDo-Task-Manager.git' to clone the GitHub Repository
+
 ## System - Frontend - React.js with Vite and Bootstrap
 
 Step O1 - Install Node_Modules ...
